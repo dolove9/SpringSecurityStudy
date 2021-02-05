@@ -1,6 +1,7 @@
 package com.atoncorp.study.config;
 
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -18,6 +19,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         http.formLogin();
         http.httpBasic();
+    }
 
+    //USER 정보의 설정
+    @Override
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth.inMemoryAuthentication()
+                .withUser("dolove9").password("{noop}123").roles("USER").and()
+                .withUser("admin").password("{noop}!@#").roles("ADMIN");
     }
 }
