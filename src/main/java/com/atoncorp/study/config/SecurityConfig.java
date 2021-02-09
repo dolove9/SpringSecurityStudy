@@ -11,6 +11,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+//        http.authorizeRequests().mvcMatchers("**").permitAll();
         http.authorizeRequests()
                 .mvcMatchers("/", "info").permitAll()
                 .mvcMatchers("/admin").hasRole("ADMIN")
@@ -18,6 +19,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         http.formLogin();
         http.httpBasic();
-
     }
+
 }
